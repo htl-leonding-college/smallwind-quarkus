@@ -1,0 +1,11 @@
+POST localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "Timmy's Hundefutter",
+  "unitPrice": 2.30,
+  "unitsInStock": 25,
+  "discontinued": false
+}
+
+###
