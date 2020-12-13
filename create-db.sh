@@ -12,4 +12,4 @@ cd db
 curl https://apache.mirror.digionline.de//db/derby/db-derby-10.15.2.0/db-derby-10.15.2.0-bin.zip -o derbydb.zip
 ls -l
 unzip derbydb.zip
-./db-derby-10.15.2.0-bin/bin/startNetworkServer -noSecurityManager
+
