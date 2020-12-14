@@ -3,7 +3,7 @@ set -e
 
 DIR="./db"
 if [ -d "$DIR" ]; then
-  echo "${DIR} aready exists, the installation has exited ..."
+  echo "${DIR} already exists, the installation has exited ..."
   exit 1
 fi
 echo "Installing derby-db in ${DIR} ..."

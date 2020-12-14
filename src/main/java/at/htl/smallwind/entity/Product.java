@@ -117,15 +117,13 @@ public class Product {
 
     @JsonbTransient
     public JsonObjectBuilder getJsonObjectBuilder() {
-        final JsonObjectBuilder jsonObjectBuilder =
-                Json.createObjectBuilder()
-                        .add("id", this.id)
-                        .add("name", this.name)
-                        .add("unitPrice", this.unitPrice)
-                        .add("unitsInStock", this.unitsInStock)
-                        .add("unitsInOrder", this.unitsOnOrder)
-                        .add("reorderLevel", this.reorderLevel)
-                        .add("discontinued", this.discontinued);
-        return jsonObjectBuilder;
+        return Json.createObjectBuilder()
+                .add("id", this.id)
+                .add("name", this.name)
+                .add("unitPrice", this.unitPrice)
+                .add("unitsInStock", this.unitsInStock)
+                .add("unitsInOrder", this.unitsOnOrder)
+                .add("reorderLevel", this.reorderLevel)
+                .add("discontinued", this.discontinued);
     }
 }

@@ -1,6 +1,8 @@
 package at.htl.smallwind.boundary;
 
 import at.htl.smallwind.control.DatabaseHelper;
+import com.intuit.karate.junit5.Karate;
+import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.assertj.db.type.Request;
@@ -19,7 +21,8 @@ import static org.assertj.db.output.Outputs.output;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.is;
 
-@TestMethodOrder(MethodOrderer.Alphanumeric.class)
+@QuarkusTest
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class ProductEndpointTest {
 
     private static DataSource ds;
@@ -32,9 +35,9 @@ public class ProductEndpointTest {
     @Test
     void t100_listaAllProducts() {
         JsonPath retrievedProducts = given()
-            .when()
+                .when()
                 .get("products")
-            .then()
+                .then()
                 .assertThat()
                 .statusCode(200)
                 .contentType("application/json")
@@ -84,9 +87,9 @@ public class ProductEndpointTest {
         String locationHeader = given()
                 .header("Content-Type","application/json")
                 .body(product.toString())
-            .when()
+                .when()
                 .post("/products")
-            .then()
+                .then()
                 .statusCode(anyOf(is(200),is(201)))
                 .log().headers()  // Ausgabe am Bildschirm
                 .extract().header("Location");
@@ -103,10 +106,10 @@ public class ProductEndpointTest {
 
         // get id from database
         int storedId = Long.valueOf(topfenstrudel
-            .getRow(0)
-            .getColumnValue("prod_id")
-            .getValue()
-            .toString()
+                .getRow(0)
+                .getColumnValue("prod_id")
+                .getValue()
+                .toString()
         ).intValue();
         System.out.println("id from database: " + storedId);
         assertThat(locationHeader).isEqualTo("http://localhost:8080/products/product/" + storedId);
@@ -143,9 +146,9 @@ public class ProductEndpointTest {
 
         // when
         given()
-            .when()
+                .when()
                 .delete("products/product/" + storedId)
-            .then()
+                .then()
                 .statusCode(anyOf(is(200),is(204))); // sollte eigentlich 204 NO CONTENT sein
 
         // then
@@ -154,6 +157,9 @@ public class ProductEndpointTest {
         assertThat(topfenstrudel.getRowsList().size()).isEqualTo(0);
     }
 
-
+    @Karate.Test
+    Karate t200_createProduct() {
+        return Karate.run("product-creation").relativeTo(getClass());
+    }
 
 }

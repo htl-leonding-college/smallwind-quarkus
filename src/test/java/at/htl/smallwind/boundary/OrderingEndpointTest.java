@@ -1,5 +1,6 @@
 package at.htl.smallwind.boundary;
 
+import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,12 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  * https://phauer.com/2016/testing-restful-services-java-best-practices/
  *
  */
-@TestMethodOrder(MethodOrderer.Alphanumeric.class)
+@QuarkusTest
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class OrderingEndpointTest {
 
     @BeforeAll
     private static void init() {
-        RestAssured.basePath = "/smallwind/api";
+        //RestAssured.basePath = "/smallwind/api";
     }
 
 

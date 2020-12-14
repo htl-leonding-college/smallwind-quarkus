@@ -50,7 +50,7 @@ public class ProductEndpoint {
     @POST
     public Response create(Product product, @Context UriInfo info) {
         final Product savedProduct = productDao.save(product);
-        URI uri = info.getAbsolutePathBuilder().path("/product/" + savedProduct.getId()).build();
+        URI uri = info.getAbsolutePathBuilder().path(savedProduct.getId().toString()).build();
         return Response.created(uri).build();
     }
 

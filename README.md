@@ -1,8 +1,6 @@
 # smallwind-quarkus project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+![](images/cld.png)
 
 ## Running the application in dev mode
 
@@ -55,3 +53,11 @@ If you want to learn more about building native executables, please consult http
 <p>A Hello World RESTEasy resource</p>
 
 Guide: https://quarkus.io/guides/rest-json
+
+# Testing the application
+
+./mvnw clean test
+
+# Testing of a single test method
+
+./mvnw clean -Dtest=ProductEndpointTest#t200_createProduct test
