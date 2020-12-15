@@ -13,4 +13,8 @@ Content-Type: application/json
   "discontinued": false
 }
 
+### Ausgabe aller Orderings per Country
+
+GET http://localhost:8080/orders/count-per-country
+
 ###

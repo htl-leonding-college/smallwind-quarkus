@@ -2,6 +2,7 @@ package at.htl.smallwind.entity;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,12 +11,22 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "SW_ORDERING")
-@SequenceGenerator(name = "OrderingSeq", initialValue = 10248, allocationSize = 1, sequenceName = "SW_ORDERING_SEQ")
+@SequenceGenerator(
+        name = "OrderingSeq",
+        initialValue = 10248,
+        allocationSize = 1,
+        sequenceName = "SW_ORDERING_SEQ"
+)
 @NamedQueries({
         @NamedQuery(
                 name = "Ordering.findAll",
                 query = "select o from Ordering o order by o.orderDate desc"
+        ),
+        @NamedQuery(
+                name = "Ordering.countByCountry",
+                query = "select o.customer.country, count(o) from Ordering o group by o.customer.country"
         )
+
 })
 public class Ordering {
 
@@ -110,6 +121,7 @@ public class Ordering {
         return String.format("OrderId %d, orderDate %tF", getId(), getOrderDate());
     }
 
+    @JsonbTransient
     public JsonObjectBuilder getJsonObjectBuilder() {
         final JsonObjectBuilder jsonObjectBuilder =
                 Json.createObjectBuilder()

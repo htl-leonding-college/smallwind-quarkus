@@ -14,7 +14,7 @@ import java.util.List;
 public class InitBean {
 
     @Inject
-    private Logger logger;
+    Logger logger;
 
     @Inject
     CustomerDao customerDao;

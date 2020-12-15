@@ -2,6 +2,7 @@ package at.htl.smallwind.entity;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 @Entity
@@ -93,6 +94,7 @@ public class Customer {
         return name + " (" + country + ")";
     }
 
+    @JsonbTransient
     public JsonObjectBuilder getJsonObjectBuilder() {
         final JsonObjectBuilder jsonObjectBuilder =
                 Json.createObjectBuilder()

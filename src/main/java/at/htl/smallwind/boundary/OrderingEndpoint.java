@@ -10,10 +10,12 @@ import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 
 @Path("orders")
 @Produces(MediaType.APPLICATION_JSON)
@@ -34,6 +36,8 @@ public class OrderingEndpoint {
         List<Ordering> orders = orderingDao.findAll();
         return Response.ok(orders).build();
     }
+
+
 
     /**
      *
@@ -63,5 +67,11 @@ public class OrderingEndpoint {
         jsonObjectBuilderOrdering.add("items", arrayBuilderItems);
 
         return jsonObjectBuilderOrdering.build();
+    }
+
+    @GET
+    @Path("count-per-country")
+    public Map<String,Integer> countByCountries() {
+        return orderingDao.countByCountries();
     }
 }

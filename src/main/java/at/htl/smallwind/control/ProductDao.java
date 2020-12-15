@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 import static java.lang.System.out;
 
 @ApplicationScoped
-@Transactional
 public class ProductDao {
 
     private static final String FILE_NAME = "product.csv";
@@ -35,6 +34,7 @@ public class ProductDao {
         return em.find(Product.class, id);
     }
 
+    @Transactional
     public Product save(Product product) {
         return em.merge(product);
     }
@@ -45,11 +45,13 @@ public class ProductDao {
                 .getResultList();
     }
 
+    @Transactional
     public void delete(long id) {
         Product productToDelete = em.find(Product.class, id);
         em.remove(productToDelete);
     }
 
+    @Transactional
     public void readFromCsv() {
 ////        new BufferedReader(new InputStreamReader(this.getClass()
 ////                .getResourceAsStream(FILE_NAME), StandardCharsets.UTF_8))

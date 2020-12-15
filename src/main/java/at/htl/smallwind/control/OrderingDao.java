@@ -7,6 +7,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -16,12 +18,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.System.out;
 
 @ApplicationScoped
-@Transactional
 public class OrderingDao {
 
     @Inject
@@ -48,11 +51,37 @@ public class OrderingDao {
                 .getResultList();
     }
 
+    public Map<String,Integer> countByCountries() {
+        Query query = em.createNamedQuery("Ordering.countByCountry");
+        List<Object[]> counts = query.getResultList();
+
+        // Kontrollausgabe, ob Query funktioniert
+        for (Object[] entry : counts) {
+            out.println(entry[0] + " - " + entry[1]);
+        }
+        Map<String, Integer> ordersPerCountry = new HashMap<>();
+
+        counts
+                .stream()
+                .peek(out::println)
+                .forEach(c -> ordersPerCountry.put(
+                        c[0].toString(),
+                        Integer.valueOf(c[1].toString())
+                ));
+
+        for (Map.Entry<String, Integer> entry : ordersPerCountry.entrySet()) {
+            out.println(entry.getKey() + " -- " + entry.getValue());
+        }
+        return ordersPerCountry;
+    }
+
+
     /**
      * Importing the csv-file using a lambda-stream.
      *
      * The stream elements must be sorted, so the continouing id's are correct.
      */
+    @Transactional
     public void readFromCsv() {
 //        new BufferedReader(new InputStreamReader(this.getClass()
 //                .getResourceAsStream(FILE_NAME), StandardCharsets.UTF_8))

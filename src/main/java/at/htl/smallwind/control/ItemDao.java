@@ -20,7 +20,6 @@ import java.util.List;
  * 563,10335,2,15.2,7,0.2
  */
 @ApplicationScoped
-@Transactional
 public class ItemDao {
 
     @Inject
@@ -71,6 +70,7 @@ public class ItemDao {
      * Use a lambda stream to create item-object and persist these objects in the database.
      * Use the method "createItem(...)" for creating the item-objects
      */
+    @Transactional
     public void readFromCsv() {
 //        new BufferedReader(new InputStreamReader(this.getClass()
 //                .getResourceAsStream(FILE_NAME), StandardCharsets.UTF_8))
@@ -91,6 +91,7 @@ public class ItemDao {
      *
      * Comment: this method is package scoped for testing purposes
      */
+    @Transactional
     Item createItem(String line) {
         String[] elems = line.split(",");
         Ordering ordering = orderingDao.findById(Long.parseLong(elems[1]));
