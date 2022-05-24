@@ -7,7 +7,6 @@ import at.htl.smallwind.entity.Product;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.InputStream;

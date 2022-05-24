@@ -1,3 +1,5 @@
+*.jar
+
 #Db-Folder
 db/
 
@@ -37,3 +39,4 @@ nb-configuration.xml
 # patch
 *.orig
 *.rej
+db/

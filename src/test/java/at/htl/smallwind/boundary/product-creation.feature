@@ -1,15 +1,15 @@
 Feature: Product creation endpoint.
   An user of the endpoint is able to create Products
 
-  Background:
-    * url baseUrl
+Background:
+  * url baseUrl
 
-  Scenario: Create a Person
-    Given path 'products'
-    And request { name: "Timmie's Hundefutter", unitPrice: 2.30, unitsInStock: 25, discontinued: "false" }
-    When method POST
-    Then status 201
-    And match header Location contains 'http://localhost:8081/products/78'
+Scenario: Create a Person
+  Given path 'products'
+  And request { name: "Timmie's Hundefutter", unitPrice: 2.30, unitsInStock: 25, discontinued: "false" }
+  When method POST
+  Then status 201
+  And match header Location contains 'http://localhost:8081/products/78'
 
 #  Scenario: Create a Person and use a json instead of inline
 #    Given path 'person'

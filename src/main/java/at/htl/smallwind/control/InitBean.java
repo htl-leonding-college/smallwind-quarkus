@@ -3,9 +3,7 @@ package at.htl.smallwind.control;
 import io.quarkus.runtime.StartupEvent;
 import org.jboss.logging.Logger;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.util.List;

@@ -112,11 +112,11 @@ public class ProductEndpointTest {
                 .toString()
         ).intValue();
         System.out.println("id from database: " + storedId);
-        assertThat(locationHeader).isEqualTo("http://localhost:8080/products/product/" + storedId);
+        assertThat(locationHeader).isEqualTo("http://localhost:8081/products/" + storedId);
 
         org.assertj.db.api.Assertions.assertThat(topfenstrudel).row()
                 .value().isGreaterThan(77)
-                .value().isEqualTo(0)
+                .value().isEqualTo(false)
                 .value().isEqualTo("Topfenstrudel")
                 .value().isEqualTo(7)
                 .value().isEqualTo(15.0)
@@ -157,9 +157,6 @@ public class ProductEndpointTest {
         assertThat(topfenstrudel.getRowsList().size()).isEqualTo(0);
     }
 
-    @Karate.Test
-    Karate t200_createProduct() {
-        return Karate.run("product-creation").relativeTo(getClass());
-    }
+
 
 }
